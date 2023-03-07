@@ -1,0 +1,31 @@
+{
+    "questions": [
+        {
+            "question": "Como se llama el primer disco de los Beatles?",
+            "time": 10,
+            "optionA": "Please Please Me",
+            "optionB": "Help!",
+            "optionC": "A Hard Day's Night",
+            "optionD": "Beatles for Sale",
+            "answer": "A"
+        },
+        {
+            "question": "Cuantos discos de estudio tiene la banda?",
+            "time": 9,
+            "optionA": "1",
+            "optionB": "2",
+            "optionC": "3",
+            "optionD": "4",
+            "answer": "A"
+        },
+        {
+            "question": "Cual es el nombre del primer sencillo de los Beatles?",
+            "time": 12,
+            "optionA": " Please Please Me",
+            "optionB": "Help!",
+            "optionC": "A Hard Day's Night",
+            "optionD": "Beatles for Sale",
+            "answer": "A"
+        }
+    ]
+}
