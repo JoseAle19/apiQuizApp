@@ -31,7 +31,7 @@ io.on("connection", (socket) => {
 
 
  
-server.listen(port, () => {
+server.listen(8080, () => {
   console.log(`Escuchando en el puerto ${port}`);
   console.log(`http://localhost:4000/`);
 });
