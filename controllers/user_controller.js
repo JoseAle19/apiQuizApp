@@ -26,10 +26,10 @@ const now = new Date();
 
   con.query(sql, values,(err, result) => {
     if (err) {
-      return res.status(400).json({
+      return res.status(500).json({
         status: false,
         msg: "Error al registrar el usuario",
-        error: err.sqlMessage,
+        error: err,
       });
     }
     const datauser = {

@@ -9,7 +9,11 @@ require('dotenv').config()
 const port = process.env.PORT || 3000;
 //Midlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+  {
+    origin: "*",
+  }
+));
 app.use(index); // todas la rutas de index.js
 
 // const server = http.createServer(app);
