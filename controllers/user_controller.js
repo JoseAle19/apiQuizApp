@@ -1,6 +1,7 @@
 const con = require("../config/database");
 const { request } = require("express");
 const bcrypt = require("bcryptjs");
+const { encryptPassword } = require("../helpers/encryptPassword");
 const getUser = (req, res) => {
   const sql = `SELECT users.name, users.email, roles.des as rol FROM users inner join roles on users.idrol = roles.id`;
 
@@ -12,17 +13,18 @@ const getUser = (req, res) => {
         err,
       });
     }
-    return res.json({ 'Usuarios':result });
+    return res.json({ Usuarios: result });
   });
 };
 
 const insertUser = (req = request, res = response) => {
   let { name, email, password, idRol } = req.body;
-  const salt = bcrypt.genSaltSync();
-  password = bcrypt.hashSync(password, salt);
-  const sql = `INSERT INTO users (name, email, password, idrol) VALUES('${name}', '${email}','${password}','${idRol}')`;
+  const sql = `INSERT INTO users (name, email, password, idrol, year) VALUES(?,?,?,?,?)`;
+  // Obtener la fecha actual
+const now = new Date();
+  const values = [name, email, encryptPassword(password), idRol, now.getFullYear()];
 
-  con.query(sql, (err, result) => {
+  con.query(sql, values,(err, result) => {
     if (err) {
       return res.status(400).json({
         status: false,

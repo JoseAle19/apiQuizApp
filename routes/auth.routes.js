@@ -20,6 +20,5 @@ router.post(
 
 
 
-router.post("/loginTest", loginTest);
 
 module.exports = router;

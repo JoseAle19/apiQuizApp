@@ -7,5 +7,6 @@ app.use('/auth', require('./routes/auth.routes'));
 app.use('/questions', require('./routes/questions.routes'));
 app.use('/categories', require('./routes/categories.routes'));
 app.use('/adviser-team', require('./routes/adviserWithTeam.routes'));
+app.use('/test', require('./routes/test.routes'));
 
 module.exports = app;

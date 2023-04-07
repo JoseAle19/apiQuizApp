@@ -1,5 +1,6 @@
 
 use sockSerJos;
+
 ## Comienza usuarios
 drop table users;
 CREATE TABLE users(
@@ -12,9 +13,9 @@ CREATE TABLE users(
     key idrol (idrol),
     constraint rolFK foreign key (idrol) references roles(id)
 );
-
-
-
-delete from users where id = 3;
 select * from users;
+
 SELECT users.name, users.email, roles.des as rol  FROM users  inner join roles on roles.id = users.idrol;
+
+
+select  * from users where idrol  = 1;

@@ -38,27 +38,7 @@ const login = (req, res) => {
   });
 };
 
-const loginTest = (req, res) => {
-  const { nameTest, passwordTest } = req.body;
-  const sql = `select * from test where name = '${nameTest}' and clave = '${passwordTest}' `;
-  con.query(sql, (err, result) => {
-    if (err) {
-      return res.status(500).json({
-        status: false,
-        msg: "Error en el servidor",
-        error: err,
-      });
-    }
-
-    return res.status(200).json({
-      status: true,
-      msg: `Examen ${nameTest}`,
-        data: result,
-    });
-  });
-};
 
 module.exports = {
   login,
-  loginTest,
 };

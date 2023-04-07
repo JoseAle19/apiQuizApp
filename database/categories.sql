@@ -11,5 +11,5 @@ insert into category(description) values ('Quimica');
 insert into category(description) values ('Historia');  
 
 
-
+show tables;
 select * from category;

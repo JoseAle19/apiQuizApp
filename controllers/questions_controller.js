@@ -35,13 +35,13 @@ const getQuestions = (req, res) => {
 
 const getAllQuestions = (req , res ) => {
   // const sql = `select * from questions`;
-  const sql = `select questions.id, questions.question, questions.timeQ, questions.answers, questions.id_category, questions.id_teacher, category.id, category.description from questions inner join category on category.id = questions.id_category`
+  const sql = `select questions.id as 'id_Q', questions.question, questions.timeQ, questions.answers, questions.id_category, questions.id_teacher, category.id, category.description from questions inner join category on category.id = questions.id_category`
 
   con.query(sql, (err, result) => {
     if (err) {
       return res.status(500).json({
         status: false,
-        msg: "Error al obtener las preguntas",
+        msg: "Ocurrio un error",
         err,
       });
     }
