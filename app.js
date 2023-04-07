@@ -33,5 +33,5 @@ app.use(index); // todas la rutas de index.js
  
 app.listen(port, () => {
   console.log(`Escuchando en el puerto ${port}`);
-  console.log(`http://localhost:4000/`);
+  console.log(`http://localhost:${port}/`);
 });
