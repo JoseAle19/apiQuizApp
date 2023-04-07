@@ -6,7 +6,7 @@ const index = require("./index");
 const app = express();
 require('dotenv').config()
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 //Midlewares
 app.use(express.json());
 app.use(cors());
