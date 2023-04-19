@@ -1,5 +1,4 @@
 const mysql = require("mysql2");
-const dataBase = "railway";
 require("dotenv").config();
 const { HOST_MYSQL, USER_MYSQL, PASSWORD_MYSQL, DATABASE_MYSQL, PORT_MYSQL } =
   process.env;
@@ -16,7 +15,7 @@ dB_con.connect((err) => {
     console.log(`Error al conectar la base de datos ${err}`);
     return;
   }
-  console.log(`Conectado a la base de datos ${dataBase}`);
+  console.log(`Conectado a la base de datos ${DATABASE_MYSQL}`);
 });
 
 module.exports = dB_con;

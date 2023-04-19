@@ -111,7 +111,53 @@ const insertQuestion = (req, res) => {
   });
 };
 
+const updateQuestion = (req, res) => {
+  // Obtener los valores que se actualizarán desde el cuerpo de la solicitud
+const { question, timeQ, answers, id_category, id_teacher } = req.body;
 
+// Construir la consulta de actualización
+let updateQuery = 'UPDATE questions SET ';
+let updateValues = [];
+
+if (question) {
+  updateQuery += 'question = ?, ';
+  updateValues.push(question);
+}
+
+if (timeQ) {
+  updateQuery += 'timeQ = ?, ';
+  updateValues.push(timeQ);
+}
+
+if (answers) {
+  updateQuery += 'answers = ?, ';
+  updateValues.push(answers);
+}
+
+if (id_category) {
+  updateQuery += 'id_category = ?, ';
+  updateValues.push(id_category);
+}
+
+if (id_teacher) {
+  updateQuery += 'id_teacher = ?, ';
+  updateValues.push(id_teacher);
+}
+
+// Eliminar la coma y el espacio adicionales al final de la consulta de actualización
+updateQuery = updateQuery.slice(0, -2);
+
+// Agregar la cláusula WHERE para actualizar solo la pregunta especificada
+updateQuery += ' WHERE id = ?';
+updateValues.push(questionId);
+
+// Ejecutar la consulta de actualización
+connection.query(updateQuery, updateValues, (error, results, fields) => {
+  if (error) throw error;
+  console.log('La pregunta ha sido actualizada con éxito.');
+});
+
+}
 
 module.exports = {
   getQuestions,

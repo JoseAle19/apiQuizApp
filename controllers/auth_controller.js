@@ -6,6 +6,7 @@ const login = (req, res) => {
   const findByEmail = `SELECT * FROM users WHERE email = '${email}'`;
   con.query(findByEmail, async (err, result) => {
     if (err) {
+      console.log(err);
       return res.status(500).json({
         status: false,
         msg: "Error en el servidor, verifique la base de datos",

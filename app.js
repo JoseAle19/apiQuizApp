@@ -1,12 +1,11 @@
 const express = require("express");
-const http = require("http");
-// const routes = require("./routes/user.routes");
 const cors = require("cors");
 const index = require("./index");
 const app = express();
 require("dotenv").config();
+const env = process.env.NODE_ENV  
 
-const port = process.env.PORT || 3000;
+const port = env === "dev" ? 4000 : process.env.PORT;
 //Midlewares
 app.use(cors());
 app.use(express.json());
