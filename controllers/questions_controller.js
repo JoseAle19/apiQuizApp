@@ -1,4 +1,4 @@
-const { response, request } = require("express");
+const { response, request, json } = require("express");
 const con = require("../config/database");
 
 const getQuestions = (req, res) => {
@@ -33,9 +33,9 @@ const getQuestions = (req, res) => {
   });
 };
 
-const getAllQuestions = (req , res ) => {
+const getAllQuestions = (req, res) => {
   // const sql = `select * from questions`;
-  const sql = `select questions.id as 'id_Q', questions.question, questions.timeQ, questions.answers, questions.id_category, questions.id_teacher, category.id, category.description from questions inner join category on category.id = questions.id_category`
+  const sql = `select questions.id as 'id_Q', questions.question, questions.timeQ, questions.answers, questions.id_category, questions.id_teacher, category.id, category.description from questions inner join category on category.id = questions.id_category`;
 
   con.query(sql, (err, result) => {
     if (err) {
@@ -113,54 +113,60 @@ const insertQuestion = (req, res) => {
 
 const updateQuestion = (req, res) => {
   // Obtener los valores que se actualizarán desde el cuerpo de la solicitud
-const { question, timeQ, answers, id_category, id_teacher } = req.body;
+  const { questionId, question, timeQ, answers } = req.body;
+  // Construir la consulta de actualización
+  let updateQuery = "UPDATE questions SET ";
+  let updateValues = [];
 
-// Construir la consulta de actualización
-let updateQuery = 'UPDATE questions SET ';
-let updateValues = [];
+  if (question) {
+    updateQuery += "question = ?, ";
+    updateValues.push(question);
+  }
 
-if (question) {
-  updateQuery += 'question = ?, ';
-  updateValues.push(question);
-}
+  if (timeQ) {
+    updateQuery += "timeQ = ?, ";
+    updateValues.push(timeQ);
+  }
 
-if (timeQ) {
-  updateQuery += 'timeQ = ?, ';
-  updateValues.push(timeQ);
-}
+  if (answers) {
+    updateQuery += "answers = ?, ";
+    updateValues.push(answers);
+  }
 
-if (answers) {
-  updateQuery += 'answers = ?, ';
-  updateValues.push(answers);
-}
+  // Eliminar la coma y el espacio adicionales al final de la consulta de actualización
+  updateQuery = updateQuery.slice(0, -2);
 
-if (id_category) {
-  updateQuery += 'id_category = ?, ';
-  updateValues.push(id_category);
-}
+  // Agregar la cláusula WHERE para actualizar solo la pregunta especificada
+  updateQuery += " WHERE id = ?";
+  updateValues.push(questionId);
 
-if (id_teacher) {
-  updateQuery += 'id_teacher = ?, ';
-  updateValues.push(id_teacher);
-}
-
-// Eliminar la coma y el espacio adicionales al final de la consulta de actualización
-updateQuery = updateQuery.slice(0, -2);
-
-// Agregar la cláusula WHERE para actualizar solo la pregunta especificada
-updateQuery += ' WHERE id = ?';
-updateValues.push(questionId);
-
-// Ejecutar la consulta de actualización
-connection.query(updateQuery, updateValues, (error, results, fields) => {
-  if (error) throw error;
-  console.log('La pregunta ha sido actualizada con éxito.');
-});
-
-}
+  console.log(updateValues);
+  con.query(updateQuery, updateValues, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        status: false,
+        msg: "Ocurrio un error",
+        err: err,
+      });
+    }
+    if (result.affectedRows < 1) {
+      return res.status(400).json({
+        status: false,
+        msg: "No se actualizo la pregunta",
+        data: 0,
+      });
+    }
+    return res.status(200).json({
+      status: true,
+      msg: "Pregunta actualizada",
+      data: result,
+    });
+  });
+};
 
 module.exports = {
   getQuestions,
   insertQuestion,
-  getAllQuestions
+  getAllQuestions,
+  updateQuestion,
 };

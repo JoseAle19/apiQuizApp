@@ -10,6 +10,7 @@ const login = (req, res) => {
       return res.status(500).json({
         status: false,
         msg: "Error en el servidor, verifique la base de datos",
+        
         error: err,
       });
     }

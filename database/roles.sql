@@ -17,4 +17,4 @@ INSERT INTO roles(des) values ('Lider');
 select * from roles;
 delete from roles where id = 4;
 ##Actualizar la descripcion de los roles 
-update roles set des = 'Asesor' where id = 5;
+update roles set des = 'Asesor', 	timeQ = 21 where	 id = 5;

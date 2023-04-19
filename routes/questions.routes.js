@@ -4,6 +4,7 @@ const {
   getQuestions,
   insertQuestion,
   getAllQuestions,
+  updateQuestion,
 } = require("../controllers/questions_controller");
 const questions = require("../questions.json");
 const { validateFields } = require("../middlewares/user.middlewares");
@@ -17,7 +18,9 @@ router.get("/question", (req, res) => {
 
 router.get("/getQuestionByCategory/:idcategory/", getQuestions);
 
-router.get('/getAllQuestion', getAllQuestions)
+router.get("/getAllQuestion", getAllQuestions);
+
+router.put("/updateQuestion", updateQuestion);
 
 router.post(
   "/newQuestion",
