@@ -53,7 +53,6 @@ const addQuestion = (res, questions, id) => {
       }
 
       if (i === questions.length - 1) {
-        console.log("Creado correctamnete ");
         return res.status(201).json({
           status: true,
           msg: "Test creado correctamente",
@@ -75,7 +74,6 @@ const getTestForYear = (req, res) => {
         error: err,
       });
     }
-    console.log(result)
     return res.status(200).json({
       status: true,
       msg: "Examenes disponibles",
@@ -83,7 +81,36 @@ const getTestForYear = (req, res) => {
     });
   });
 };
+// Servicio para mostrar preguntas de un test (id_test)
+const getQuestionsByTest = (req, res) => {
+  // Obtener el id del test y el year del usuario
+  const { idTest, yearByUser } = req.params;
+  const sql = `SELECT test.duration, test.year, questions.question, questions.answers FROM  
+      test_questions
+      INNER JOIN test ON test_questions.test_id = test.id
+      INNER JOIN questions ON test_questions.question_id= questions.id 
+      WHERE test.year = ? and test.id = ?
+      `;
+  const values = [yearByUser, idTest];
+  con.query(sql, values, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        status: false,
+        msg: "Ocurrio un error",
+        error: err,
+      });
+    }
+    return res.status(200).json({
+      status: true,
+      msg: "Preguntas del examen",
+      questions: result,
+    });
+  });
+};
+
+// Exportar los modulos
 module.exports = {
   createTest,
   getTestForYear,
+  getQuestionsByTest,
 };

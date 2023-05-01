@@ -15,7 +15,7 @@ primary key (id)
 );
 
 insert into questions(question, timeQ, answers, id_teacher, id_category)  values 
-('¿Capital de mexico?',
+('¿Como imprimir un mesage en java?',
  12,
 '{
 "answers": [ {
@@ -34,12 +34,10 @@ insert into questions(question, timeQ, answers, id_teacher, id_category)  values
 }
 ]
 }',
-14,
+22,
 2
  );
  
  
 select * from questions;
-
-
-	
+ 

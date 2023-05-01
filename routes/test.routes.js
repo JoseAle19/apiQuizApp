@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { createTest , getTestForYear} = require("../controllers/test_controller");
+const { createTest , getTestForYear, getQuestionsByTest} = require("../controllers/test_controller");
 const router = Router();
 router.get("/", (req, res) => {
   res.json({
@@ -12,5 +12,7 @@ router.post("/new-test", createTest)
 
 
 router.get('/testForYear/:year', getTestForYear )
+// router para mostar las preeguntas del test
+router.get('/questionsByTest/:idTest/:yearByUser', getQuestionsByTest)
 
 module.exports = router;

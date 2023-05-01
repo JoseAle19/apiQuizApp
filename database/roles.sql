@@ -1,5 +1,6 @@
 use sockSerJos;
 
+
 DROP TABLE roles;
 create table roles(
 id int(11) auto_increment not null,

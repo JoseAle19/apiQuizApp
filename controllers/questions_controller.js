@@ -79,17 +79,17 @@ const insertQuestion = (req, res) => {
   insert into questions(question, timeQ, answers, id_teacher, id_category) 
   values( '${question}',${timeQ},'{
       "answers": [ {
-      "answer": "${r1}",
+      "answer": "${r1.toString()}",
       "correct": ${s1}
       },{
-      "answer": "${r2}",
+      "answer": "${r2.toString()}",
       "correct": ${s2}
       },{
-      "answer": "${r3}",
+      "answer": "${r3.toString()}",
       "correct": ${s3}
       },
       {
-        "answer": "${r4}",
+        "answer": "${r4.toString()}",
         "correct": ${s4}
         }
       ]
@@ -140,7 +140,6 @@ const updateQuestion = (req, res) => {
   updateQuery += " WHERE id = ?";
   updateValues.push(questionId);
 
-  console.log(updateValues);
   con.query(updateQuery, updateValues, (err, result) => {
     if (err) {
       return res.status(500).json({

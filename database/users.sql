@@ -17,5 +17,7 @@ select * from users;
 
 SELECT users.name, users.email, roles.des as rol  FROM users  inner join roles on roles.id = users.idrol;
 
+alter table users add year YEAR;
+
 
 select  * from users where idrol  = 1;

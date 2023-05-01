@@ -17,9 +17,9 @@ INSERT INTO test_questions VALUES(null,1,4);
 select * from test_questions;
 
 
-SELECT test.name, test.year, questions.question, questions.answers FROM  
+SELECT test.duration,  test.year, questions.question, questions.answers FROM  
 test_questions
 INNER JOIN test ON test_questions.test_id = test.id
 INNER JOIN questions ON test_questions.question_id= questions.id 
-WHERE test.year = 2023 and test.name = '5to concuurso'
+WHERE test.year = 2023 and test.id = 46
 
