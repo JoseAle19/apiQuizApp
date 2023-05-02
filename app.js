@@ -26,6 +26,7 @@ const io = require("socket.io")(server, {
     methods: ["GET", "POST"],
     credentials: true,
   },
+  
 });
 
 //Midlewares
