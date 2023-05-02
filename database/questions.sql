@@ -35,7 +35,7 @@ insert into questions(question, timeQ, answers, id_teacher, id_category)  values
 ]
 }',
 22,
-2
+3
  );
  
  

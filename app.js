@@ -21,7 +21,8 @@ const { Server } = require("socket.io");
 // Inicializacion de socket.io
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://127.0.0.1:5173",
+    // origin: "http://127.0.0.1:5173",
+    origin: "https://bright-torte-0b0c68.netlify.app",
     methods: ["GET", "POST"],
     credentials: true,
   },
