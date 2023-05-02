@@ -14,6 +14,7 @@ dB_con.connect((err) => {
   if (err) {
     console.log(`Error al conectar la base de datos ${err}`);
     return;
+    
   }
   console.log(`Conectado a la base de datos ${DATABASE_MYSQL}`);
 });
