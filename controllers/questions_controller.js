@@ -163,9 +163,38 @@ const updateQuestion = (req, res) => {
   });
 };
 
+const deleteQuestion = (req, res) => {
+  const { idQuestion } = req.params;
+
+  const sql = `delete from questions where id = ?`;
+  const values = [idQuestion];
+  con.query(sql, values, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        status: false,
+        msg: "Ocurrio un error",
+        err: err,
+      });
+    }
+    if (result.affectedRows < 1) {
+      return res.status(400).json({
+        status: false,
+        msg: "No se elimino la pregunta",
+        data: 0,
+      });
+    }
+    return res.status(200).json({
+      status: true,
+      msg: "Pregunta eliminada",
+      data: result,
+    });
+  });
+};
+
 module.exports = {
   getQuestions,
   insertQuestion,
   getAllQuestions,
   updateQuestion,
+  deleteQuestion,
 };

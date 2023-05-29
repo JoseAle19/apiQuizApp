@@ -15,7 +15,7 @@ INSERT INTO test values(null,
 '7mo concurso', 12, '2023-04-02 14:30:00', '2023-04-02 16:30:00', TRUE, 2023
 );
 
-select * from test;  
+select * from test where year = 2023 and status = 1;  
 
 
 

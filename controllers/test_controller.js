@@ -7,6 +7,8 @@ const createTest = (req, res) => {
   for (let i = 0; i < questions.length; i++) {
     time += questions[i].timeQ;
   }
+  // Redondear la duracion del examen
+  time = Math.round(time / 60);
 
   const sql = `INSERT INTO test(name, duration, start_test, end_test, status, year) VALUES(?,?,?,?,?,?)`;
   const yearMonthDay = `${now.getFullYear()}-${(now.getMonth() + 1)
@@ -64,7 +66,9 @@ const addQuestion = (res, questions, id) => {
 
 const getTestForYear = (req, res) => {
   const { year } = req.params;
-  const sql = `SELECT * FROM test WHERE year = ?`;
+  // Obtener los examenes disponibles para el año actual
+  // y con el status en 1 que es activo
+  const sql = `SELECT * FROM test WHERE year = ? and status= 1`;
   const value = [year];
   con.query(sql, value, (err, result) => {
     if (err) {
@@ -108,9 +112,58 @@ const getQuestionsByTest = (req, res) => {
   });
 };
 
+const getTestActive = (req, res) => {
+  const {idTest} = req.params
+  const sql = `SELECT * FROM test_active WHERE testId = ?`;
+  const value = [idTest];
+  con.query(sql, value, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        status: false,
+        msg: "Ocurrio un error",
+        error: err,
+      });
+    }
+    if (result.length === 0) {
+      return res.status(400).json({
+        status: false,
+        msg: "Test no activo",
+      });
+    }
+    return res.status(200).json({
+      status: true,
+      msg: "Test activo",
+      result,
+    });
+  });
+};
+
+const addTestActive = (test = 0) => {
+  const sql = `INSERT INTO test_active(testId) VALUES (?)`;
+  const value = [test];
+  con.query(sql, value, (err, result) => {
+    if (err) {
+      console.log(err);
+      return {
+        status: false,
+        msg: "Ocurrio un error",
+        error: err,
+      };
+    }
+    console.log("Test activo");
+    return {
+      status: true,
+      msg: "Test activo",
+      result,
+    };
+  });
+};
+
 // Exportar los modulos
 module.exports = {
   createTest,
   getTestForYear,
   getQuestionsByTest,
+  addTestActive,
+  getTestActive,
 };

@@ -18,13 +18,13 @@ const http = require("http");
 const server = http.createServer(app);
 // Desestructuracion de la libreria de socket.io
 const { Server } = require("socket.io");
+const { addTestActive } = require("./controllers/test_controller");
 // Inicializacion de socket.io
 const io = require("socket.io")(server, {
   cors: {
-    origin: 
-      // "http://127.0.0.1:5173",
-      "https://bright-torte-0b0c68.netlify.app",
-    
+    // origin: "http://127.0.0.1:5173",
+    origin: "https://bright-torte-0b0c68.netlify.app",
+
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -39,28 +39,35 @@ app.use(index);
 
 io.on("connection", (socket) => {
   socket.on("user", (user, idTest) => {
-    console.log("Id del examen " + idTest);
     io.emit("server-newUserConnected", user);
   });
   // emit y on de administrador
-  socket.on("admin-connected", (admin) => {
-    console.log(`Administrador conectado ${admin.name}`);
+  socket.on("clientAdmin-enable-test", (idTest) => {
+    addTestActive(idTest);
   });
   // emit y on de las preguntas del examen
   socket.on("client-user-answer", ({ user, questionIndex, answerIndex }) => {
-    console.log("Respuesta del usuario " + user.name);
-    console.log("Indice de la pregunta " + questionIndex);
-    console.log("Descripcion de la respuesta " + answerIndex.answer);
     io.emit("server-user-answer", { user, questionIndex, answerIndex });
   });
-
+  socket.on("client-user-DoneTest", (data) => {
+    io.emit("server-user-DoneTest", data);
+  });
   // emit y on de las respuestas del usuario
   socket.on("client-user-disconnected", (user) => {
-    console.log("usuario desconectado " + user.name);
     io.emit("server-user-disconnected", user);
   });
+
+  // Usuario ya participo en el examen
+  socket.on("client-user-AlreadyDoneUserTest", (id) => {
+    io.emit("server-user-AlreadyDoneUserTest", id);
+  });
+
+  socket.on("client-user-questionsAnswered", (data) => {
+    io.emit("server-user-questionsAnswered", data);
+  });
+
   socket.on("disconnect", () => {
-    console.log("Usuario desconectado ");
+    // console.log("Usuario desconectado ");
   });
 });
 

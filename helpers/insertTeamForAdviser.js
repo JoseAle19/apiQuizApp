@@ -56,7 +56,7 @@ const addClassMatesForTeam = (res, classMates, idAdviser, nameTeam) => {
       nameStudent,
       emailStudent.toLowerCase().replace(/\s+/g, ""),
       encryptPassword(passwordStudent.toLowerCase().replace(/\s+/g, "")),
-      rolStudent ? 1 : 2,
+      rolStudent ? 5 : 1,
       now.getFullYear(),
     ];
     con.query(sql, values, (err, result) => {

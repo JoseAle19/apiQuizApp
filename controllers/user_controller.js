@@ -23,12 +23,11 @@ const insertUser = (req = request, res = response) => {
   // Obtener la fecha actual
 const now = new Date();
   const values = [name, email, encryptPassword(password), idRol, now.getFullYear()];
-
   con.query(sql, values,(err, result) => {
     if (err) {
       return res.status(500).json({
         status: false,
-        msg: "Error al registrar el usuario",
+        msg: "Ocurrio un error",
         error: err,
       });
     }

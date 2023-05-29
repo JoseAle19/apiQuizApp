@@ -9,7 +9,9 @@ insert into category(description) values ('Matematicas');
 insert into category(description) values ('Programacion');
 insert into category(description) values ('Quimica');
 insert into category(description) values ('Historia');  
+insert into category(description) values ('Español');  
+insert into category(description) values ('Ingles');  
 
 
-show tables;
+
 select * from category;

@@ -19,7 +19,7 @@ router.post(
     check("email", "El email es obligatorio").not().isEmpty(),
     check("email", "El email no es un correo valido").isEmail(),
     check("email").custom((email) => {
-      const sql = `SELECT * FROM users where email = '${email}' and idrol = '${5}'`;
+      const sql = `SELECT * FROM users where email = '${email}' and idrol = '${4}'`;
       return validateField(sql).then((email) => {
         
         if (email) {

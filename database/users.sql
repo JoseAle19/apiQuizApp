@@ -1,8 +1,9 @@
 
 use sockSerJos;
 
+
+
 ## Comienza usuarios
-drop table users;
 CREATE TABLE users(
 	id INT(11) AUTO_INCREMENT not null,
     name VARCHAR(100) NOT NULL,
@@ -13,11 +14,11 @@ CREATE TABLE users(
     key idrol (idrol),
     constraint rolFK foreign key (idrol) references roles(id)
 );
+
 select * from users;
+show tables ;
 
 SELECT users.name, users.email, roles.des as rol  FROM users  inner join roles on roles.id = users.idrol;
 
 alter table users add year YEAR;
-
-
 select  * from users where idrol  = 1;
