@@ -1,7 +1,6 @@
 use sockserjos;
 
-drop table adviser;
-CREATE TABLE adviser(
+ CREATE TABLE adviser(
 id INT(11) AUTO_INCREMENT NOT NULL,
 institution VARCHAR(100) UNIQUE NOT NULL,
 phone VARCHAR(10) UNIQUE NOT NULL,

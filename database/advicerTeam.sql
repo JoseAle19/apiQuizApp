@@ -1,7 +1,6 @@
 use sockserjos;
 
-drop table adviserTeam;
-CREATE TABLE adviserTeam(
+ CREATE TABLE adviserTeam(
 id INT(11) AUTO_INCREMENT  primary KEY ,
 id1 INT(11) NOT NULL,
 id2 INT(11) NOT NULL,

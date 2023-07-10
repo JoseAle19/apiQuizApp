@@ -1,8 +1,7 @@
 use sockSerJos;
 
 
-DROP TABLE roles;
-create table roles(
+ create table roles(
 id int(11) auto_increment not null,
 des varchar(50) not null,
 primary key (id)

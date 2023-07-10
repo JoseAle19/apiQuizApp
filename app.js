@@ -39,7 +39,7 @@ app.use(index);
 
 io.on("connection", (socket) => {
   socket.on("user", (user, idTest) => {
-    io.emit("server-newUserConnected", user);
+    io.emit("server-newUserConnected", user)
   });
   // emit y on de administrador
   socket.on("clientAdmin-enable-test", (idTest) => {
